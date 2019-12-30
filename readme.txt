@@ -1,11 +1,17 @@
-# Gateway Kamoney #
-**Powered by:** [Kamoney Empreendimentos Digitais Ltda.](http://github.com/kamoney)
-**License:** GPLv3
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+=== Gateway Kamoney ===
+Contributors: claudecigoularte
+Tags: cart, checkout, e-commerce, kamoney, criptomoedas, gateway, bitcoin, ethereum, cripo
+Donate link: https://www.kamoney.com.br
+Requires at least: 3.0
+Tested up to: 5.3.2
+Stable tag: trunk
+Requires PHP: 7.0.1
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Aceite pagamentos em criptomoedas em sua loja virtual geranciada pelo WooCommerce via [Kamoney] (https://www.kamoney.com.br).
+Aceite pagamentos em criptomoedas em sua loja virtual geranciada pelo WooCommerce via Kamoney.
 
-## Description ##
+== Description ==
 
 O plugin Gateway Kamoney é a maneira mais fácil, rápida e segura de aceitar pagamentos com criptomoedas (Bitcoin, Ethereum, etc.), sem nenhum conhecimento específico com blockchain ou derivados.
 
@@ -26,7 +32,7 @@ O plugin Gateway Kamoney é a maneira mais fácil, rápida e segura de aceitar p
 5. Nosso sistema irá monitorar o pagamento notificando cada status à sua loja
 6. Quando confirmado o pagamento, a venda será concluída em sua loja
 
-## Installation ##
+== Installation ==
 
 <h4>Exigências<h4>
 
@@ -54,3 +60,36 @@ Depois de instalar o plugin Gateway Kamoney, as etapas de configuração são:
 6. Clique em "Salvar alterações" na parte inferior da página;
 
 Caso deseje realizar simulações em testnet (rede de testes Bitcoin ou Litecoin), gere as chaves no ambiente Sandbox (teste) e marque a opção Utilizar Sandbox (api teste) nas configurações do plugin.
+
+== Frequently Asked Questions ==
+
+= Já solicitei o credenciamento, e agora? =
+
+Se você já solicitou o credenciamento, basta aguardar nossa análise. Ela será feita em poucas horas.
+
+= Possui algum limite de recebimento? =
+
+Não. Porém, para realizar o saque dos respectivos valores recebidos, você possui um limite inicial de R$ 35 mil / mês. Para aumentar esse valor, é necessário solicitar a verificação de conta no menu Minha Conta > Verificação.
+
+= Quais as taxas envolvidas? =
+
+Atualmente, é cobrada uma taxa de 3% sobre a cotação da moeda ao pagador. Ao lojista não é cobrada nenhuma taxa. Se vender R$ 100, você recebe exatamente R$ 100 em sua conta após solicitar o saque em nossa plataforma.
+
+== Screenshots ==
+
+1. /assets/screenshot-1.png
+2. /assets/screenshot-2.png
+3. /assets/screenshot-3.png
+4. /assets/screenshot-4.png
+5. /assets/screenshot-5.png
+6. /assets/screenshot-6.png
+
+== Changelog ==
+
+= 0.1 =
+* Lançamento.
+
+== Upgrade Notice ==
+
+= 0.1 =
+Versão de Lançamento
