@@ -1,6 +1,6 @@
 === Gateway Kamoney ===
 Contributors: claudecigoularte
-Tags: cart, checkout, e-commerce, kamoney, criptomoedas, gateway, bitcoin, ethereum, cripo
+Tags: gateway, bitcoin, ethereum, cart, checkout, criptomoedas, cripo, e-commerce, kamoney
 Donate link: https://www.kamoney.com.br
 Requires at least: 3.0
 Tested up to: 5.3.2
@@ -21,7 +21,7 @@ O plugin Gateway Kamoney é a maneira mais fácil, rápida e segura de aceitar p
 * Cotação da moeda em Real Brasileiro (R$)
 * Receba sem custo por transferência bancária (Real Brasileiro)
 * Por segurança, estornos não são possíveis com pagamentos em criptomoeda
-* Tenha uma visão geral de todas as suas vendas em sua conta de comerciante Kamoney em (https://bitpay.com/dashboard)
+* Tenha uma visão geral de todas as suas vendas em sua conta de comerciante Kamoney em (https://www.kamoney.com.br)
 
 <h4>Funcionamento básico</h4>
 
