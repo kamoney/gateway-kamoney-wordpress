@@ -21,7 +21,7 @@ class Kamoney
         $this->public_key = $public_key;
         $this->secret_key = $secret_key;
 
-        if ($sandbox = 'yes') {
+        if ($sandbox == 'yes') {
             $this->api = "https://sandbox-api.kamoney.com.br";
         }
     }
