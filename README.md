@@ -1,4 +1,4 @@
-# WC Kamoney Gateway
+# Gateway Kamoney
 
 **Powered by:** [Kamoney](https://www.kamoney.com.br)
 **License:** GPLv3
@@ -6,7 +6,7 @@
 
 ---
 
-O plugin WC Kamoney Gateway é a solução perfeita para aceitar pagamentos em criptomoedas (Bitcoin, Ethereum, etc.) na sua loja virtual gerenciada pelo WooCommerce. Com este plugin, você poderá oferecer aos seus clientes uma forma fácil, rápida e segura de realizar pagamentos com criptomoedas, sem precisar ter conhecimento específico sobre blockchain ou outros conceitos relacionados.
+O plugin Gateway Kamoney é a solução perfeita para aceitar pagamentos em criptomoedas (Bitcoin, Ethereum, etc.) na sua loja virtual gerenciada pelo WooCommerce. Com este plugin, você poderá oferecer aos seus clientes uma forma fácil, rápida e segura de realizar pagamentos com criptomoedas, sem precisar ter conhecimento específico sobre blockchain ou outros conceitos relacionados.
 
 ## Principais Características
 
@@ -32,7 +32,7 @@ Todos os status são notificados para sua loja, até a conclusão ou cancelament
 
 1. Faça o download e instale o plugin no seu diretório de plugins do WordPress.
 2. Ative o plugin no painel de administração do WordPress.
-3. Acesse as configurações de pagamento no WooCommerce e habilite o WC Kamoney Gateway.
+3. Acesse as configurações de pagamento no WooCommerce e habilite o Gateway Kamoney.
 4. Insira seu ID de comerciante junto à [Conta Kamoney](https://dash.kamoney.com.br).
 5. Personalize as opções de exibição do método de pagamento de acordo com suas preferências.
 
