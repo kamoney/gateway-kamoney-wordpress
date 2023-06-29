@@ -38,7 +38,7 @@ Todos os status são notificados para sua loja, até a conclusão ou cancelament
 
 Tudo pronto! Bem vindo ao mundo das criptomoedas!
 
-Para obter suporte ou relatar problemas, entre em contato com nossa equipe de [Suporte Kamoney](https://web.whatsapp.com/send/?phone=553184724987&text=Estou com dúvidas no Plugin Wordpress&type=phone_number&app_absent=0).
+Para obter suporte ou relatar problemas, entre em contato com nossa equipe de [Suporte Kamoney](https://web.whatsapp.com/send/?phone=553184724987).
 
 ---
 
