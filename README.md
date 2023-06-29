@@ -1,8 +1,8 @@
 # Gateway Kamoney
 
-**Powered by:** [Kamoney](https://www.kamoney.com.br)
-**License:** GPLv3
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+- **Powered by:** [Kamoney](https://www.kamoney.com.br)
+- **License:** GPLv3
+- **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 ---
 
