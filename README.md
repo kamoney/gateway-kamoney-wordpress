@@ -10,7 +10,7 @@ O plugin Gateway Kamoney é a solução perfeita para aceitar pagamentos em crip
 
 ## Changelog
 
-### 2023-06-28 
+#### 2023-06-28 
 
 * Atualização para utilização da API v2 Kamoney publicada em 2023-06-23.
 
