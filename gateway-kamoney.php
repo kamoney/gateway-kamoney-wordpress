@@ -3,7 +3,7 @@
 Plugin Name: Gateway Kamoney
 Plugin URI: https://www.kamoney.com.br
 Description: Plugin WooCommerce que permite pagamentos usando criptomoeda via Kamoney. Este plugin requer uma conta Kamoney (https://www.kamoney.com.br).
-Version: 3.0
+Version: 2.0
 */
 
 defined( 'ABSPATH' ) || exit;
