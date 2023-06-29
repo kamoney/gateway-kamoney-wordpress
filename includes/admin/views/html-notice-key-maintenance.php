@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <div class="error inline">
 	<p>
-		<strong>Não foi possível analisar o método junto à Kamoney</strong>: <?php echo $test->error; ?>
+		<strong>Método de pagamento Kamoney desabilitado</strong><br />
+		O serviço está temporariamente desabilitado.<br />
+		- <?php echo $test->error; ?>
 	</p>
 </div>

@@ -1,7 +1,6 @@
 === Gateway Kamoney ===
-Contributors: claudecigoularte
-Tags: gateway, bitcoin, ethereum, cart, checkout, criptomoedas, cripo, e-commerce, kamoney
-Donate link: https://www.kamoney.com.br
+Contributors: csgoularte
+Tags: gateway, bitcoin, ethereum, cart, checkout, criptomoedas, cripo, e-commerce, kamoney, payment gateway
 Requires at least: 3.0
 Tested up to: 5.3.2
 Stable tag: trunk
@@ -36,44 +35,43 @@ O plugin Gateway Kamoney é a maneira mais fácil, rápida e segura de aceitar p
 
 <h4>Exigências</h4>
 
-* Este plugin requer Woocommerce instalado.
-* Uma conta lojista Kamoney ([Sandbox](https://sandbox.kamoney.com.br/) ou [Produção](https://www.kamoney.com.br/))
-
-Nota: Após realizar o cadastro, solicite o credenciamento como lojista para receber pagamentos em criptomoedas.
+* Este plugin requer WooCommerce instalado;
+* E necessário ter uma conta junto à [Kamoney](https://www.kamoney.com.br).
 
 <h4>Instalação do plugin</h4>
 
-1. Copie os arquivos do plugin para a pasta `/wp-content/plugins/gateway-kamoney`, ou instale-o diretamente na tela de plugins do WordPress;
-2. Ative o plugin através da tela 'Plugins' no WordPress
+1. Faça o download do plugin e copie os arquivos para a pasta `/wp-content/plugins/gateway-kamoney` ou instale-o diretamente na tela de plugins do WordPress;
+2. Ative o plugin no painel de administração do WordPress.
 
 Após ativação do plugin, o Gateway Kamoney aparecerá na seção Woocommerce>Pagamentos.
 
 <h4>Configurações do plugin</h4>
 
-Depois de instalar o plugin Gateway Kamoney, as etapas de configuração são:
+Depois de instalar o plugin, as etapas de configuração são:
 
 1. Crie uma conta em [Kamoney](https://www.kamoney.com.br);
-2. Solicite o credenciamento como Lojista;
-3. Após a aprovação do credenciamento, gere suas credenciais (chaves secreta e pública) no menu APIs;
-4. Entre no seu painel de administração do WordPress, selecione Woocommerce>Pagamentos e clique no botão Configurar ao lado dos métodos de pagamento Gateway Kamoney;
-5. Cole suas chaves geradas anteriormente, nos respectivos campos "Chave pública Kamoney" e "Chave secreta Kamoney";
-6. Clique em "Salvar alterações" na parte inferior da página;
-
-Caso deseje realizar simulações em testnet (rede de testes Bitcoin ou Litecoin), gere as chaves no ambiente Sandbox (teste) e marque a opção Utilizar Sandbox (api teste) nas configurações do plugin.
+2. Copie seu ID de Comerciante acessando o menu "Comerciante > Sobre o Gateway" em sua [Conta Kamoney](https://dash.kamoney.com.br) e procure por "Plug-in Wordpress";
+3. No seu painel de administração do WordPress, selecione Woocommerce>Pagamentos e clique no botão Configurar ao lado dos métodos de pagamento Gateway Kamoney;
+4. Insira seu ID de comerciante obtidio no passo 2;
+5. Salve as alterações na parte inferior da página.
 
 == Frequently Asked Questions ==
 
-= Já solicitei o credenciamento, e agora? =
+= Preciso ser CNPJ para utilizar o Gateway Kamoney? =
 
-Se você já solicitou o credenciamento, basta aguardar nossa análise. Ela será feita em poucas horas.
+Não. Qualquer pessoa, física ou jurídica pode utilizar este plugin e aceitar critpoemodas em seu comércio.
 
-= Possui algum limite de recebimento? =
+= Possui limite de valores? =
 
-Não. Porém, para realizar o saque dos respectivos valores recebidos, você possui um limite inicial de R$ 35 mil / mês. Para aumentar esse valor, é necessário solicitar a verificação de conta no menu Minha Conta > Verificação.
+Sim. Ao se cadastrar na Kamoney, você possui um limite inicial de movimentação. Para aumento do limite, é necessário realizar a verificação de conta, junto à plataforma da [Kamoney](https://dash.kamoney.com.br). Caso necessite de mais limite, entre em contato com o [Suporte Kamoney](https://web.whatsapp.com/send/?phone=553184724987&text=Estou com dúvidas no Plugin Wordpress&type=phone_number&app_absent=0).
 
-= Quais as taxas envolvidas? =
+= Qual a taxa de transação? =
 
-Atualmente, é cobrada uma taxa de 3% sobre a cotação da moeda ao pagador. Ao lojista não é cobrada nenhuma taxa. Se vender R$ 100, você recebe exatamente R$ 100 em sua conta após solicitar o saque em nossa plataforma.
+A taxa de transação é cobrada do cliente final, ou seja, o comerciante recebe o valor integração em sua conta [Kamoney](https://dash.kamoney.com.br).
+
+= É possível acompanhar meu histórico de vendas na plataforma? =
+
+Sim. Acessando sua conta [Kamoney](https://dash.kamoney.com.br) você terá um histórico completo de suas vendas, dados pessoais, entre outros. Atráves ainda da sua conta, você pode solicitar o saque para sua conta bancária.
 
 == Screenshots ==
 
@@ -83,13 +81,16 @@ Atualmente, é cobrada uma taxa de 3% sobre a cotação da moeda ao pagador. Ao 
 4. /assets/screenshot-4.png
 5. /assets/screenshot-5.png
 6. /assets/screenshot-6.png
+7. /assets/screenshot-7.png
+8. /assets/screenshot-8.png
+9. /assets/screenshot-9.png
 
 == Changelog ==
 
-= 0.1 =
-* Lançamento.
+= 2023-06-28 =
+* Atualização para utilização da API v2 Kamoney publicada em 2023-06-23.
 
 == Upgrade Notice ==
 
-= 0.1 =
-Versão de Lançamento
+= 2023-06-28 =
+* Atualização para utilização da API v2 Kamoney publicada em 2023-06-23.

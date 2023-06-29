@@ -18,10 +18,13 @@ if ('yes' == $this->get_option('enabled')) {
         include dirname(__FILE__) . '/html-notice-currency-not-supported.php';
     }
 
-    $kamoney = new Kamoney($this->kamoney_public_key, $this->kamoney_secret_key, $this->sandbox);
-    $test = $kamoney->statusServiceOrder();
-    if (array_key_exists("error", $test) || false === $test) {
+    $kamoney = new Kamoney($this->kamoney_id_merchant);
+    $test = $kamoney->status_merchant();
+
+    if ($test->success == false) {
         include dirname(__FILE__) . '/html-notice-key-missing.php';
+    } else if ($test->data->maintenance == true) {
+        include dirname(__FILE__) . '/html-notice-key-maintenance.php';
     }
 }
 ?>

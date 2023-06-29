@@ -17,7 +17,7 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
     public function __construct()
     {
         $this->id = "kamoney_payment";
-        $this->icon = plugins_url('assets/images/kamoney.png', plugin_dir_path(__FILE__));
+        $this->icon = plugins_url('assets/Icon.png', plugin_dir_path(__FILE__));
         $this->method_title = "Gateway Kamoney";
         $this->method_description = "Aceite criptomoedas na sua loja WooCommerce.<br /><b>Este plugin requer um cadastro na plataforma <a href='https://www.kamoney.com.br' target='_blank'>Kamoney</a>.";
         $this->title = "Gateway Kamoney";
@@ -35,7 +35,7 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
         }
 
         // Kamoney API
-        $this->api = new Kamoney($this->kamoney_public_key, $this->kamoney_secret_key, $this->sandbox);
+        $this->api = new Kamoney($this->kamoney_id_merchant);
 
         // Active logs.
         if ('yes' === $this->debug) {
@@ -67,39 +67,26 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
                 'title' => 'Título',
                 'type' => 'text',
                 'desc_tip' => 'Título da forma de pagamento.',
-                'default' => 'Pagar com criptomoedas - by Kamoney',
+                'default' => 'Pagar com criptomoedas - ',
             ),
             'description' => array(
                 'title' => 'Description',
                 'type' => 'textarea',
                 'desc_tip' => 'Descrição da forma de pagamento.',
-                'default' => 'Você será redirecionado para https://www.kamoney.com.br para efetuar o pagamento',
+                'default' => 'Você será redirecionado para o site www.kamoney.com.br para efetuar o pagamento',
                 'css' => 'max-width:400px;',
             ),
-            'kamoney_public_key' => array(
-                'title' => 'Chave pública Kamoney',
+            'kamoney_id_merchant' => array(
+                'title' => 'ID de Comerciante Kamoney',
                 'type' => 'text',
-                'desc_tip' => 'Esta é a chave pública fornecida pelo kamoney.com.br quando você se inscreveu em uma conta.',
+                'desc_tip' => 'Acesse o menu "Comerciante/Sobre o Gateway e procure por Plug-in Wordpress. Lá vocÊ conseguirá visualizar seu ID.',
                 'default' => '',
-            ),
-            'kamoney_secret_key' => array(
-                'title' => 'Chave secreta Kamoney',
-                'type' => 'password',
-                'desc_tip' => 'Essa é a chave secreta fornecida pelo kamoney.com.br quando você se inscreveu em uma conta.',
             ),
             'debug' => array(
                 'title' => 'Modo de depuração',
                 'label' => 'Ativar registro de log',
                 'type' => 'checkbox',
                 'default' => 'no',
-            ),
-            'sandbox' => array(
-                'title' => 'Utilizar Sandbox (api teste)',
-                'label' => 'Ativar sandbox (Cadastre-se em https://sandbox.kamoney.com.br/registro e solicite ao suporte para haiblitar sua conta)',
-                'type' => 'checkbox',
-                'desc_tip' => 'Você poderá utilizar uma versão de testes Kamoney chamada de sandbox.',
-                'default' => 'no',
-
             ),
         );
     }
@@ -132,9 +119,10 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
     public function is_available()
     {
         // Test if is valid for use.
-        $test = $this->api->statusServiceOrder();
+        $test = $this->api->status_merchant();
 
-        $available = 'yes' === $this->get_option('enabled') && !array_key_exists("error", $test) && false !== $test && $this->using_supported_currency();
+        $available = 'yes' === $this->get_option('enabled') && true === $test->success && false === $test->data->maintenance && $this->using_supported_currency();
+
         return $available;
     }
 
@@ -142,29 +130,34 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
     public function process_payment($order_id)
     {
         global $woocommerce;
+        
         $order = new WC_Order($order_id);
         $result = 'fail';
         $url = '';
 
-        $data = array(
+        $token = hash_hmac('sha512', $order_id, $this->kamoney_id_merchant);
+        $callback = WC()->api_request_url('wc_gateway_kamoney_payment') . "?token=$token";
+
+        $data = [
             "amount" => $this->get_order_total(),
             "order_id" => $order_id,
-            "callback" => WC()->api_request_url('wc_gateway_kamoney_payment'),
-            'redirect' => $order->get_view_order_url(),//
-        );
+            "additional_info" => "Venda realizada pelo Plug-In Wordpress",
+            "callback" => $callback,
+            'redirect' => $order->get_view_order_url(),
+        ];
 
-        $sale = $this->api->salesCreateChk($data);
+        $sale = $this->api->merchant_create($data);
+        
+        // {
+        //     "success": true,
+        //     "msg": "",
+        //     "data": {
+        //     "id": "MKM66461077"
+        //     "redirect": "https://www.kamoney.com.br/merchant/checkout/MKM66461077"
+        //     }
+        // }
 
-        if ('yes' === $this->debug) {
-            $this->log->add($this->id, $sale["error"]);
-        }
-
-        if (($sale !== false) && (!array_key_exists("error", $sale))) {
-
-            if ($this->sandbox == "yes") {
-                $this->chk = "https://sandbox.kamoney.com.br/merchant/checkout/";
-            }
-
+        if ($sale->success) {
             // Mark as on-hold (we're awaiting the transaction)
             $order->update_status('on-hold');
 
@@ -172,29 +165,26 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
             $woocommerce->cart->empty_cart();
 
             // Update order meta
-            foreach ($sale as $key => $value) {
+            $sale_data = (array) $sale->data;
+
+            foreach ($sale_data as $key => $value) {
                 update_post_meta($order->id, "kamoney_" . $key, $value);
             }
 
             // Add note informing Kamoney Payment ID
-            $order->add_order_note('ID Kamoney: ' . $sale["id"]);
+            $order->add_order_note('Identificação da venda na Kamoney: ' . $sale->data->id);
 
             $result = "success";
-            $url = $this->chk . $sale["id"];
+            $url = $sale->data->redirect;
 
             update_post_meta($order->id, "kamoney_redirect", $url);
-
         } else {
+            if ('yes' === $this->debug) {
+                $this->log->add($this->id, $sale->error);
+            }
 
-            // Kamoney Sale Creating Error
-            $error_message = $sale["erorr"];
-
-        }
-
-        if ($result == "fail") {
-            // Update order status
             $order->update_status('failed');
-            $order->add_order_note('Ocorre um erro ao conectar à Kamoney: ' . $error_message);
+            $order->add_order_note('Ocorre um erro ao conectar à Kamoney: ' . $sale->error);
 
             // Report error in the checkout page
             wc_add_notice('Erro ao conectar à kamoney.com.br', 'error');
@@ -205,7 +195,6 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
             'result' => $result,
             'redirect' => $url,
         );
-
     }
 
     // Validate fields
@@ -228,97 +217,101 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
         
         $headers = getallheaders();
 
-        if (!array_key_exists('Host', $headers) || !array_key_exists('signature', $headers) || !isset($_POST)) {
+        $data_json = file_get_contents('php://input');
+
+        if(is_null($data_json)) {
             exit($msg_error);
         }
-
-        $signature = $headers['signature'];
-        $post_data = http_build_query($_POST, '', '&');
-        $signature_valid = hash_hmac('sha512', $post_data, $this->kamoney_secret_key);
-
-        if ($signature != $signature_valid) {
-            exit($msg_error);
-        }
-
-        if (!array_key_exists("order_id", $_POST) && !array_key_exists("id", $_POST)) {
-            exit($msg_error);
-        }
-
-        $id = sanitize_text_field($_POST["id"]);
-        $status_code = sanitize_text_field($_POST["status_code"]);
-        $currency = sanitize_text_field($_POST["currency"]);
-        $currency_name = sanitize_text_field($_POST["currency_name"]);
-        $address = sanitize_text_field($_POST["address"]);
-        $txid = sanitize_text_field($_POST["txid"]);
-        $amount = floatval($_POST["amount"]);
-        $amount_order = floatval($_POST["amount_order"]);
-        $amount_order_partial = floatval($_POST["amount_order_partial"]);
-        $order_id = intval($_POST["order_id"]);
         
-        $order = wc_get_order($order_id);
+        if (!isset($_GET['token'])) {
+            exit($msg_error);
+        }
 
+        $data = json_decode($data_json);        
+        $token = sanitize_text_field($_GET['token']);
+        $token_compare = hash_hmac('sha512', $data->external->order_id, $this->kamoney_id_merchant);      
+        
+        if ($token !== $token_compare) {
+            exit($msg_error);
+        }
+
+        if (!isset($data->id)) {
+            exit($msg_error);
+        }
+        
+        $id = sanitize_text_field($data->id);
+        $status_code = sanitize_text_field($data->status->code);
+        $currency = sanitize_text_field($data->asset->asset);
+        $currency_name = sanitize_text_field($data->asset->name);
+        $address = sanitize_text_field($data->address);
+        $txid = sanitize_text_field($data->txid->id);
+        $amount = floatval($data->txid->amount);
+        $amount_order = floatval($data->asset->total);
+        $amount_order_partial = floatval($data->asset->received);
+        $order_id = intval($data->external->order_id);
+
+        $order = wc_get_order($order_id);
+        $order_id_wp  = $order->get_id(); // Get the order ID
+        
         if ($order == false) {
             exit($msg_error);
         }
-
-        if ($order->get_status() == "processing") {
+        
+        update_post_meta($order_id_wp, "kamoney_asset", "$currency_name ($currency)");
+        update_post_meta($order_id_wp, "kamoney_address", $address);
+        
+        if ($status_code == 'PROCESSING' && $order->get_status() == "processing") {
             exit($msg_ok);
         }
         
-        if (get_post_meta($order->id, "kamoney_id", true) !== $id) {
+        if (get_post_meta($order_id_wp, "kamoney_id", true) !== $id) {
             if ('yes' === $this->debug) {
                 $this->log->add($this->id, "Invalid Kamoney POST");
             }
-
+            
             exit($msg_error);
         }
         
         if ('yes' === $this->debug) {
-            $this->log->add($this->id, "Order $order->id exists and match");
-        }
-
-        if ('yes' === $this->debug) {
-            $this->log->add($this->id, "Order $order->id has status " . $status_code);
-        }
-
-        $confirmed_status = array(
-            "WAITING_CONFIRMS",
-            "UNCONFIRMED_APPROVED",
-            "CONFIRMED",
-        );
-
-        if (in_array($status_code, $confirmed_status) && $order->get_status() == "on-hold") {
-            if ('yes' === $this->debug) {
-                $this->log->add($this->id, "Order $order->id has a confirmed status");
-            }
-
-            wc_reduce_stock_levels($order_id);
-            $order->update_status('processing');
+            $this->log->add($this->id, "Order $order_id_wp exists and match");
+            $this->log->add($this->id, "Order $order_id_wp has status " . $status_code);
         }
         
+        $order_note_msg = '';
+
         switch ($status_code) {
-            case "WAITING_CONFIRMS":
-                $order->add_order_note('Transação identificada. Aguardando confirmação na blockchain.');
+            case "PROCESSING":
+                if($order->get_status() == "on-hold") {
+                    wc_reduce_stock_levels($order_id);
+                }
+
+                $order->update_status('processing');
+                $order_note_msg = 'O pagamento foi identificado, estamos aguardando a confirmação na blockchain.';
                 break;
-            case "UNCONFIRMED_APPROVED":
-                $order->add_order_note('Montante enviado aprovado. Aguardando confirmação na blockchain.');
+            case "PARTIAL":
+                if($order->get_status() == "on-hold") {
+                    wc_reduce_stock_levels($order_id);
+                }
+
+                $order->update_status('processing');
+                $order_note_msg = 'Cliente pagou um valor inferior. Estamos aguardando o restante das critpomoedas.';
                 break;
-            case "UNCONFIRMED_PARTIAL":
-                $order->add_order_note('Montante enviado está abaixo do devido. Aguardando confirmação na blockchain.');
-                break;
-            case "UNCONFIRMED_REOPENED":
-                $order->add_order_note('Novo montante foi enviado. Aguardando confirmação na blockchain.');
-                break;
-            case "CONFIRMED_PARTIAL":
-                $order->add_order_note('Pagamento confirmado na blockchain. O montante enviado está abaixo do devido.');
+            case "COMPLETED":
+                if($order->get_status() == "on-hold") {
+                    wc_reduce_stock_levels($order_id);
+                }
+
+                $order->update_status('completed');
+                $order_note_msg = 'Pagamento concluído. O valor já está disponível em sua conta Kamoney.';
                 break;
             case "CANCELED":
-                $order->add_order_note('Ordem cancelada.');
                 $order->update_status('cancelled');
+                $order_note_msg = 'O pedido foi cancelado pelo cliente na pltaforma Kamoney.';
                 break;
-            case "CONFIRMED":
-                $order->add_order_note('Pagamento confirmado na blockchain.');
-                break;
+        }
+        
+        if(!empty($order_note_msg)) {
+            $order->add_order_note($order_note_msg);
         }
 
         exit($msg_ok);

@@ -1,56 +1,45 @@
-# Gateway Kamoney #
-**Powered by:** [Kamoney Empreendimentos Digitais Ltda.](http://github.com/kamoney)
+# WC Kamoney Gateway
+
+**Powered by:** [Kamoney](https://www.kamoney.com.br)
 **License:** GPLv3
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-Aceite pagamentos em criptomoedas em sua loja virtual geranciada pelo WooCommerce via [Kamoney] (https://www.kamoney.com.br).
+---
 
-## Description ##
+O plugin WC Kamoney Gateway é a solução perfeita para aceitar pagamentos em criptomoedas (Bitcoin, Ethereum, etc.) na sua loja virtual gerenciada pelo WooCommerce. Com este plugin, você poderá oferecer aos seus clientes uma forma fácil, rápida e segura de realizar pagamentos com criptomoedas, sem precisar ter conhecimento específico sobre blockchain ou outros conceitos relacionados.
 
-O plugin Gateway Kamoney é a maneira mais fácil, rápida e segura de aceitar pagamentos com criptomoedas (Bitcoin, Ethereum, etc.), sem nenhum conhecimento específico com blockchain ou derivados.
+## Principais Características
 
-<h4>Características principais</h4>
+- Aceite Bitcoin e altcoins e receba o valor em Reais (R$).
+- Cotação da moeda em Real Brasileiro (R$).
+- Receba pagamentos diretamente em sua conta bancária, sem custos adicionais.
+- Transações em criptomoedas são seguras e não permitem estornos.
+- Acompanhe todas as suas vendas em uma visão geral na sua [Conta comerciante Kamoney](https://dash.kamoney.com.br).
 
-* Aceite bitcoin e altcoins e receba em Reais (R$)
-* Cotação da moeda em Real Brasileiro (R$)
-* Receba sem custo por transferência bancária (Real Brasileiro)
-* Por segurança, estornos não são possíveis com pagamentos em criptomoeda
-* Tenha uma visão geral de todas as suas vendas em sua conta de comerciante Kamoney em (https://www.kamoney.com.br)
+## Funcionamento Básico
 
-<h4>Funcionamento básico</h4>
+Após seu cliente criar um pedido em sua loja, ao escolher o método de pagamento Kamoney, ele será redirecionado para nosso checkout de pagamento, no site Kamoney, para escolher qual a criptomoeda que deseja utilizar. 
 
-1. Cliente cria o pedido normalmente em sua loja
-2. Será gerada uma venda no site [Kamoney] (https://www.kamoney.com.br)
-3. Seu cliente será redirecionado ao site [Kamoney] (https://www.kamoney.com.br) para selecionar a criptomoeda de sua preferência
-4. Sue cliente realiza o pagamento
-5. Nosso sistema irá monitorar o pagamento notificando cada status à sua loja
-6. Quando confirmado o pagamento, a venda será concluída em sua loja
+Seu cliente realiza o envio das criptomoedas, e nosso sistema irá monitorar a transação em blockchain. 
 
-## Installation ##
+Uma vez recebidas as moedas, nosso sistema irá notificar sua loja, sobre o recebimento das moedas, e sobre o saldo disponível em sua [Conta Kamoney](https://dash.kamoney.com.br).
 
-<h4>Exigências</h4>
+Todos os status são notificados para sua loja, até a conclusão ou cancelamento do pedido na plataforma Kamoney.
 
-* Este plugin requer Woocommerce instalado.
-* Uma conta lojista Kamoney ([Sandbox](https://sandbox.kamoney.com.br/) ou [Produção](https://www.kamoney.com.br/))
+*Caso o cliente não realize o pagamento, a venda em nossa plataforma é automaticamente cancelada após alguns minutos.*
 
-Nota: Após realizar o cadastro, solicite o credenciamento como lojista para receber pagamentos em criptomoedas.
+## Como utilizar
 
-<h4>Instalação do plugin</h4>
+1. Faça o download e instale o plugin no seu diretório de plugins do WordPress.
+2. Ative o plugin no painel de administração do WordPress.
+3. Acesse as configurações de pagamento no WooCommerce e habilite o WC Kamoney Gateway.
+4. Insira seu ID de comerciante junto à [Conta Kamoney](https://dash.kamoney.com.br).
+5. Personalize as opções de exibição do método de pagamento de acordo com suas preferências.
 
-1. Copie os arquivos do plugin para a pasta `/wp-content/plugins/gateway-kamoney`, ou instale-o diretamente na tela de plugins do WordPress;
-2. Ative o plugin através da tela 'Plugins' no WordPress
+Tudo pronto! Bem vindo ao mundo das criptomoedas!
 
-Após ativação do plugin, o Gateway Kamoney aparecerá na seção Woocommerce>Pagamentos.
+Para obter suporte ou relatar problemas, entre em contato com nossa equipe de [Suporte Kamoney](https://web.whatsapp.com/send/?phone=553184724987&text=Estou com dúvidas no Plugin Wordpress&type=phone_number&app_absent=0).
 
-<h4>Configurações do plugin</h4>
+---
 
-Depois de instalar o plugin Gateway Kamoney, as etapas de configuração são:
-
-1. Crie uma conta em [Kamoney](https://www.kamoney.com.br);
-2. Solicite o credenciamento como Lojista;
-3. Após a aprovação do credenciamento, gere suas credenciais (chaves secreta e pública) no menu APIs;
-4. Entre no seu painel de administração do WordPress, selecione Woocommerce>Pagamentos e clique no botão Configurar ao lado dos métodos de pagamento Gateway Kamoney;
-5. Cole suas chaves geradas anteriormente, nos respectivos campos "Chave pública Kamoney" e "Chave secreta Kamoney";
-6. Clique em "Salvar alterações" na parte inferior da página;
-
-Caso deseje realizar simulações em testnet (rede de testes Bitcoin ou Litecoin), gere as chaves no ambiente Sandbox (teste) e marque a opção Utilizar Sandbox (api teste) nas configurações do plugin.
+**Aviso importante:** Este plugin requer uma conta ativa na Kamoney para funcionamento correto.
