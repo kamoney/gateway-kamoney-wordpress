@@ -8,6 +8,12 @@
 
 O plugin Gateway Kamoney é a solução perfeita para aceitar pagamentos em criptomoedas (Bitcoin, Ethereum, etc.) na sua loja virtual gerenciada pelo WooCommerce. Com este plugin, você poderá oferecer aos seus clientes uma forma fácil, rápida e segura de realizar pagamentos com criptomoedas, sem precisar ter conhecimento específico sobre blockchain ou outros conceitos relacionados.
 
+## Changelog
+
+### 2023-06-28 
+
+* Atualização para utilização da API v2 Kamoney publicada em 2023-06-23.
+
 ## Principais Características
 
 - Aceite Bitcoin e altcoins e receba o valor em Reais (R$).
