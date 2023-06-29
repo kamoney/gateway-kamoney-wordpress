@@ -17,7 +17,7 @@ class WC_Kamoney_Gateway extends WC_Payment_Gateway
     public function __construct()
     {
         $this->id = "kamoney_payment";
-        $this->icon = plugins_url('assets/Icon.png', plugin_dir_path(__FILE__));
+        $this->icon = plugins_url('assets/icon.png', plugin_dir_path(__FILE__));
         $this->method_title = "Gateway Kamoney";
         $this->method_description = "Aceite criptomoedas na sua loja WooCommerce.<br /><b>Este plugin requer um cadastro na plataforma <a href='https://www.kamoney.com.br' target='_blank'>Kamoney</a>.";
         $this->title = "Gateway Kamoney";
